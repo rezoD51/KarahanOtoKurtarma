@@ -184,7 +184,7 @@
         }
 
         .emergency-text {
-            color: #ff4757;
+            color: #3b0308;
             font-size: 1.2em;
             font-weight: 600;
             margin: 20px 0;
@@ -1268,18 +1268,141 @@
         .emergency-text {
             text-align: center;
         }
+
+        .background-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background-image: url('resimler/10.jpeg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        /* Mobil cihazlar için düzenleme */
+        @media (max-width: 768px) {
+            .background-image {
+                width: 100vw;
+                height: 100vh;
+                position: fixed;
+            }
+            
+            .hero {
+                width: 100vw;
+                height: 100vh;
+                position: relative;
+                overflow: hidden;
+            }
+        }
+
+        /* Hero content için stil güncellemesi */
+        .hero h1 {
+            color: #000000;
+            font-size: 4.5em;
+            margin-bottom: 25px;
+            line-height: 1.2;
+            font-weight: 900;
+            -webkit-text-stroke: 2px white;
+            text-stroke: 2px white;
+            text-shadow: none;
+        }
+
+        .hero p {
+            color: #000000;
+            font-size: 1.8em;
+            margin-bottom: 30px;
+            font-weight: 700;
+            -webkit-text-stroke: 1px white;
+            text-stroke: 1px white;
+            text-shadow: none;
+        }
+
+        .hero a {
+            display: inline-block;
+            padding: 15px 30px;
+            background: #000000;
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: 2px solid #000000;
+        }
+
+        .hero a:hover {
+            background: #ffffff;
+            color: #000000;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        /* Mobil için düzenleme */
+        @media (max-width: 768px) {
+            .text-overlay {
+                max-width: 90%;
+                padding: 20px;
+            }
+            
+            .hero h1 {
+                font-size: 3em;
+            }
+            
+            .hero p {
+                font-size: 1.3em;
+            }
+        }
+
+        .text-overlay {
+            position: absolute;
+            bottom: 15%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            text-align: center;
+            z-index: 2;
+        }
+
+        /* İletişim butonu için */
+        .hero a {
+            display: inline-block;
+            padding: 15px 40px;
+            background: #000000;
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: 600;
+            margin-top: 20px;
+            border: 2px solid white;
+        }
+
+        /* Mobil görünüm için */
+        @media (max-width: 768px) {
+            .text-overlay {
+                bottom: 20%;
+            }
+        }
+
+        /* Çok küçük ekranlar için */
+        @media (max-width: 480px) {
+            .text-overlay {
+                bottom: 25%;
+            }
+        }
     </style>
 </head>
 <body>
     <!-- Hero Section -->
     <section class="hero-section">
         <div class="hero">
-            <video autoplay muted loop playsinline class="background-video">
-                <source src="/resimler/10.jpeg" type="10">
-            </video>
-            <h1>Karahan Oto<br>Kurtarma</h1>
-            <p>Yolda kalmayın, biz yanınızdayız!</p>
-            <a href="#contact">İletişim</a>
+            <div class="background-image"></div>
+            <div class="text-overlay">
+                <h1>Karahan Oto<br>Kurtarma</h1>
+                <p>Yolda kalmayın, biz yanınızdayız!</p>
+                <a href="#contact">İletişim</a>
+            </div>
         </div>
     </section>
 
@@ -1303,6 +1426,7 @@
                 </a>
             </div>
         </div>
+        <br>
     </section>
 
     <section class="services-section" id="services">
@@ -1650,9 +1774,8 @@
             const track = document.querySelector('.gallery-track');
             const dots = document.querySelectorAll('.dot');
             
-            if (index >= totalGroups) currentGroup = 0;
-            if (index < 0) currentGroup = totalGroups - 1;
-            else currentGroup = index;
+            currentGroup = index % totalGroups;
+            if (currentGroup < 0) currentGroup = totalGroups - 1;
             
             track.style.transform = `translateX(-${currentGroup * 100}%)`;
             
@@ -1822,19 +1945,8 @@
         });
     </script>
 
-    <!-- Video yüklenme durumunu kontrol etmek için JavaScript -->
-    <script>
-    document.querySelector('video').addEventListener('error', function(e) {
-        console.log('Video yüklenme hatası:', e);
-    });
-    </script>
-
-        <div class="footer-bottom">
-            <p>Karahan Oto Kurtarma - Tüm Hakları Saklıdır. © 2025</p>
-        </div>
-    </footer>
-
-   
-</body>
-</html>
+    <div class="footer-bottom">
+        <p>Karahan Oto Kurtarma - Tüm Hakları Saklıdır. © 2025</p>
+    </div>
+</footer>
 
